@@ -1,17 +1,18 @@
 #!/bin/bash
 
-utils="amimullvad apt-du bye droidmnt extract git-cloc nsa-name open-term \
+UTILS="amimullvad apt-du bye droidmnt extract git-cloc nsa-name open-term \
 vimv yt-music"
+VERSION="v0.0.1"
 
 main() {
 	cmd="$(basename "$0")"
 
-	if ! contains "$utils" "$cmd"; then
+	if ! contains "$UTILS" "$cmd"; then
 		if test "$#" -eq 0 || test "$1" = "--help"; then
 			printusg
 		elif test "$1" = "--list"; then
 			printlist
-		elif contains "$utils" "$1"; then
+		elif contains "$UTILS" "$1"; then
 			cmd="$1"
 			shift
 		else
@@ -24,8 +25,8 @@ main() {
 }
 
 printusg() {
+	printf "crzutils %s multi-call shell script." "$VERSION"
 	cat << 'EOF'
-crzutils v0.0.1 multi-call shell script.
 (C) Cristian Ariza
 
 Usage: crzutils [function [arguments]...]
@@ -33,12 +34,12 @@ Usage: crzutils [function [arguments]...]
 
 Currently defined functions:
 EOF
-	printf '\t%s\n' "$utils"
+	printf '\t%s\n' "$UTILS"
 	exit 1
 }
 
 printlist() {
-	printf '%s\n' "$utils" | sed 's/ /\n/g'
+	printf '%s\n' "$UTILS" | sed 's/ /\n/g'
 	exit 0
 }
 
