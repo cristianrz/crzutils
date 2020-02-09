@@ -11,7 +11,7 @@ make install
 
 ### Symlinking
 
-If the crzutils executable is renamed to one of the commands it supports, it will act as that command automatically: 
+If the crzutils executable is renamed to one of the commands it supports, it will act as that command automatically:
 
 ```sh
 ln -s crzutils search
@@ -30,9 +30,31 @@ done
 
 ## Usage
 
-Usage: crzutils [function [arguments]...]
-   or: crzutils --list
+Usage:
+
+```
+crzutils [function [arguments]...]
+```
+
+or:
+
+```
+crzutils --list
+```
 
 Currently defined functions:
-	apt-du bye droidmnt extract git-cloc nsa-name open-term own pid search start vimv xid yt-music
 
+- apt-du
+- bye
+- droidmnt
+- extract
+- git-cloc
+- nsa-name
+- open-term
+- own
+- pid
+- search
+- start
+- vimv
+- xid
+- yt-music
