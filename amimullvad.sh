@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Checks if connected to mullvad
 
-curl -s https://am.i.mullvad.net/connected
+amimullvad() {
+	curl -s https://am.i.mullvad.net/connected
+}

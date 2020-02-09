@@ -2,7 +2,7 @@
 #
 # Generates a random name similar to the NSA project names
 
-main() {
+nsaname() {
 	local noun
 	local adjective
 
@@ -8170,5 +8170,3 @@ zany
 zealous
 zesty
 zigzag"
-
-main "$@"

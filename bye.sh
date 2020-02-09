@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Prompts the user for a logout option
 
@@ -18,7 +18,7 @@ ask() {
 	esac
 }
 
-main() {
+bye() {
 	cat << 'EOF'
 What do you want to do?
 1) poweroff
@@ -30,5 +30,3 @@ EOF
 
 	ask
 }
-
-main
