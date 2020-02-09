@@ -4,7 +4,6 @@ all: crzutils
 
 crzutils: $(OBJ) main.sh Makefile
 	@echo '#!/bin/bash' > crzutils
-	@echo 'set -x' >> crzutils
 	@shfmt -mn $(OBJ) >> crzutils
 	@cat main.sh >> crzutils
 	@chmod a+x crzutils
