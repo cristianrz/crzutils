@@ -2,7 +2,7 @@
 #
 # Generates a random name similar to the NSA project names
 
-nsaname() {
+nsa-name() {
 	local noun
 	local adjective
 

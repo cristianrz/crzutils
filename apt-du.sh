@@ -2,7 +2,7 @@
 #
 # Shows installed packages sorted by size
 
-aptdu() {
+apt-du() {
 	set -u
 
 	if test "$#" -ne 0 && test "$1" == "-n"; then

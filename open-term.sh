@@ -2,7 +2,7 @@
 #
 # If a terminal is open, raise it. Otherwise, open a new one.
 
-openterm() {
+open-term() {
 	TERMINAL="sakura"
 
 	if pgrep "$TERMINAL"; then

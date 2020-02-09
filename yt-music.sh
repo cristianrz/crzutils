@@ -3,7 +3,7 @@
 # If argument is passed, download audio from youtube to the Music directory.
 # Otherwise, open VLC on the Music directory.
 
-ytmusic() {
+yt-music() {
 	case "$#" in
 	0) vlc -L -Z ~/Music/ > /dev/null 2>&1 &;;
 	*)
