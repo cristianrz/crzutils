@@ -1,4 +1,4 @@
-OBJ = amimullvad.sh apt-du.sh bye.sh droidmnt.sh extract.sh git-cloc.sh nsa-name.sh open-term.sh vimv.sh yt-music.sh
+OBJ := $(shell ls -1 *.sh | grep -v main.sh | sed 's/\n/ /g')
 
 all: crzutils
 

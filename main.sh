@@ -1,7 +1,7 @@
 #!/bin/bash
 
-UTILS="amimullvad apt-du bye droidmnt extract git-cloc nsa-name open-term \
-vimv yt-music"
+UTILS="apt-du bye droidmnt extract git-cloc nsa-name open-term \
+own pid search start vimv xid yt-music"
 VERSION="v0.0.1"
 
 main() {
