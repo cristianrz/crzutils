@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Generates a random name similar to the NSA project names
 #
@@ -30,6 +30,7 @@ Generates a random name similar to the NSA project names.
 	if test "$#" -gt 0; then
 		case "$1" in
 		"-n" | "--nice")
+			# These need /bin/bash
 			adjective=${adjective^}
 			noun=${noun^}
 			;;
