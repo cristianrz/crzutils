@@ -11,7 +11,7 @@ Copyright (C) 2020 Cristian Ariza
 
 Usage: $0 [OPTION]... [FILE]...
 
-Chowns a folder to yourself.
+Chowns a FILE to yourself.
 
 	    --help    display this help and exit"
 
@@ -20,9 +20,11 @@ if test "$#" -eq 0; then
 	exit 1
 fi
 
-if test "$1" = "--help"; then
+case "$1" in
+"-"*)
 	printf '%s\n' "$usage"
-	exit
-fi
+	exit 1
+	;;
+esac
 
 exec chown -R "$USER":"$USER" "$@"
