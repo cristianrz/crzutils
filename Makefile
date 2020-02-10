@@ -1,15 +1,16 @@
-OBJ := $(shell ls -1 *.sh | grep -v main.sh | sed 's/\n/ /g')
+OBJ = apt-du bye droidmnt extract git-cloc nsa-name open-term own search start vimv xid yt-music
+
+STOW = /usr/local/stow
 
 all: crzutils
 
-crzutils: $(OBJ) main.sh Makefile
-	@echo '#!/bin/bash' > crzutils
-	@shfmt -mn $(OBJ) >> crzutils
-	@cat main.sh >> crzutils
-	@chmod a+x crzutils
+crzutils: $(OBJ)
 
 install:
-	@mv crzutils /usr/local/bin
+	@rm -rf $(STOW)/crzutils
+	@mkdir -p $(STOW)/crzutils/bin
+	@cp -t $(STOW)/crzutils/bin $(OBJ)
+	@stow -d $(STOW) crzutils
 
 clean:
-	@rm -f crzutils
+	@rm -f $(OBJ)
