@@ -1,15 +1,25 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Shows installed packages sorted by size
+#
+# Copyright (C) 2020 Cristian Ariza
+#
+# See LICENSE file for details
 
-apt-du() {
-	set -u
+usage="crzutils v0.0.1
+Copyright (C) 2020 Cristian Ariza
 
-	if test "$#" -ne 0 && test "$1" == "-n"; then
-		dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n | head -n "$2"
-		exit
-	fi
+Usage: $0 [OPTION]
 
-	dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n
+Shows installed packages sorted by size.
 
-}
+	--help    display this help and exit"
+
+case "$1" in
+"--help")
+	printf '%s\n' "$usage"
+	exit
+	;;
+esac
+
+dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n

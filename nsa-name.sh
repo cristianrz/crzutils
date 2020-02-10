@@ -1,24 +1,59 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Generates a random name similar to the NSA project names
+#
+# Copyright (C) 2020 Cristian Ariza
+#
+# See LICENSE file for details
 
-nsa-name() {
-	local noun
-	local adjective
+main() {
+
+	usage="crzutils v0.0.1
+Copyright (C) 2020 Cristian Ariza
+
+Usage: $0 [OPTION]
+Generates a random name similar to the NSA project names.
+
+	-n, --nice    nice format
+	    --help    display this help and exit"
+
+	case "$1" in
+	"--help")
+		printf '%s\n' "$usage"
+		exit
+		;;
+	esac
 
 	noun=$(echo "$nouns" | shuf -n 1)
 	adjective=$(echo "$adjectives" | shuf -n 1)
 
-	case "$1" in
-	"nice")
-		adjective=${adjective^}
-		noun=${noun^}
-		echo "$adjective $noun"
-		;;
-	*)
-		echo "$adjective-$noun"
-		;;
-	esac
+	if test "$#" -gt 0; then
+		case "$1" in
+		"-n" | "--nice")
+			adjective=${adjective^}
+			noun=${noun^}
+			;;
+		*)
+			printf '%s\n' "$usage"
+			exit 1
+			;;
+		esac
+	fi
+
+	echo "$adjective-$noun"
+}
+
+printusg() {
+	cat << 'EOF' >&2
+crzutils: command-line utilities
+(C) Cristian Ariza
+
+usage: nsa-name [-n]
+
+	-n    print capitalised and with a space
+EOF
+
+	exit 1
 }
 
 nouns="ATM
@@ -8170,3 +8205,5 @@ zany
 zealous
 zesty
 zigzag"
+
+main "$@"
