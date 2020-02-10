@@ -1,4 +1,4 @@
-OBJ = apt-du bye droidmnt extract git-cloc nsa-name open-term own search start vimv xid yt-music
+OBJ = apt-du bye droidmnt extract git-cloc nsa-name openw own search start vimv wname yt-music
 
 STOW = /usr/local/stow
 

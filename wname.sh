@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Shows the PID of a window. Works like xkill
+# Shows the process name of a window. Works like xkill
 #
 # Copyright (C) 2020 Cristian Ariza
 #
@@ -11,7 +11,7 @@ Copyright (C) 2020 Cristian Ariza
 
 Usage: $0 [OPTION]
 
-Shows the PID of a window. Works like xkill.
+Shows the process name of a window. Works like xkill.
 
 	    --help    display this help and exit"
 
@@ -20,4 +20,5 @@ if test "$1" = "--help"; then
 	exit
 fi
 
-xprop _NET_WM_PID | sed "s/_NET_WM_PID(CARDINAL) = //" | ps "$(cat)"
+cat /proc/"$(xprop | awk '/PID/ {print $3}')"/cmdline
+echo
