@@ -10,7 +10,7 @@
 usage="crzutils v0.0.1
 Copyright (C) 2020 Cristian Ariza
 
-Usage: $0 [OPTION] [URL]
+Usage: $(basename "$0") [OPTION] [URL]
 If argument is passed, downloads audio from youtube to the Music directory.
 Otherwise, opens VLC on the Music directory.
 

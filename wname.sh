@@ -9,7 +9,7 @@
 usage="crzutils v0.0.1
 Copyright (C) 2020 Cristian Ariza
 
-Usage: $0 [OPTION]
+Usage: $(basename "$0") [OPTION]
 
 Shows the process name of a window. Works like xkill.
 

@@ -14,7 +14,7 @@ die() {
 usage="crzutils v0.0.1
 Copyright (C) 2020 Cristian Ariza
 
-Usage: $0 [OPTION] [FILE]
+Usage: $(basename "$0") [OPTION] [FILE]
 Extracts a compressed file in different formats.
 
 	--help    display this help and exit"

@@ -25,7 +25,7 @@
 usage="crzutils v0.0.1 (C) 2020 Cristian Ariza
 vimv (C) 2017 Thameera Senanayaka
 
-Usage: $0 [OPTION]
+Usage: $(basename "$0") [OPTION]
 
 Lists the current directory's files in Vim, so you can edit it and save to
 rename them

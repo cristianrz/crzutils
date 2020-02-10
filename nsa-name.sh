@@ -11,7 +11,7 @@ main() {
 	usage="crzutils v0.0.1
 Copyright (C) 2020 Cristian Ariza
 
-Usage: $0 [OPTION]
+Usage: $(basename "$0") [OPTION]
 Generates a random name similar to the NSA project names.
 
 	-n, --nice    nice format

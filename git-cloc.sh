@@ -15,7 +15,7 @@ trap cleanup EXIT
 usage="crzutils v0.0.1
 Copyright (C) 2020 Cristian Ariza
 
-Usage: $0 [OPTION] [URL]
+Usage: $(basename "$0") [OPTION] [URL]
 Check lines of code of a remote git repo.
 
 	--help    display this help and exit"
