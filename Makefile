@@ -6,6 +6,9 @@ all: crzutils
 
 crzutils: $(OBJ)
 
+nsa-name: nsa-name.go
+	go build nsa-name.go
+
 install:
 	@rm -rf $(STOW)/crzutils
 	@mkdir -p $(STOW)/crzutils/bin
