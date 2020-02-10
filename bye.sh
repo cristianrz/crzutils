@@ -44,5 +44,6 @@ What do you want to do?
 3) suspend
 4) logout
 0) nothing
+
 EOF
 ask
