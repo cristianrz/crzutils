@@ -14,10 +14,10 @@ nsa-name:
 	@chmod a+x $@
 
 install:
-	@rm -rf $(STOW)/crzutils
+	@rm -f $(STOW)/crzutils/*
 	@mkdir -p $(STOW)/crzutils/bin
 	@cp -t $(STOW)/crzutils/bin $(OBJ)
 	@stow -d $(STOW) crzutils
 
 clean:
-	@rm -f $(OBJ)
+	@rm -f ./$(OBJ)
