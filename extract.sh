@@ -32,14 +32,14 @@ if test "$#" -ne 1; then
 fi
 
 case "$1" in
-*.tbz2 | *.tar.bz2) exec tar fjvx "$1" ;;
-*.tar | *.tar.xz) exec tar fvx "$1" ;;
-*.tgz | *.tar.gz) exec tar fvxz "$1" ;;
-*.7z) exec 7za x "$1" ;;
-*.Z) exec uncompress "$1" ;;
-*.bz2) exec bunzip2 "$1" ;;
-*.gz) exec gunzip "$1" ;;
-*.rar) exec unrar e "$1" ;;
-*.zip) exec unzip "$1" ;;
-*) die "'$1' cannot be extracted" ;;
+*.tbz2 | *.tar.bz2) exec tar fjvx "$@" ;;
+*.tar | *.tar.xz) exec tar fvx "$@" ;;
+*.tgz | *.tar.gz) exec tar fvxz "$@" ;;
+*.7z) exec 7za x "$@" ;;
+*.Z) exec uncompress "$@" ;;
+*.bz2) exec bunzip2 "$@" ;;
+*.gz) exec gunzip "$@" ;;
+*.rar) exec unrar e "$@" ;;
+*.zip) exec unzip "$@" ;;
+*) die "'$@' cannot be extracted" ;;
 esac
