@@ -39,7 +39,10 @@ Generates a random name similar to the NSA project names.
 			adjective = strings.Title(adjective)
 			noun = strings.Title(noun)
 			sep = " "
-			break
+      break
+    case "--help":
+			fmt.Println(usage)
+			os.Exit(0)
 		default:
 			fmt.Println(usage)
 			os.Exit(1)
