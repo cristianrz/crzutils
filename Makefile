@@ -6,8 +6,12 @@ all: crzutils
 
 crzutils: $(OBJ)
 
-nsa-name: nsa-name.go
-	go build nsa-name.go
+nsa-name:
+	@go build -o $@ $< 
+
+.sh:
+	@shfmt -mn $< >$@
+	@chmod a+x $@
 
 install:
 	@rm -rf $(STOW)/crzutils
