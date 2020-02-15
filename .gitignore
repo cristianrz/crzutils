@@ -1,9 +1,11 @@
 apt-du
+apt-list
 bye
 crzutils
 droidmnt
 extract
 git-cloc
+hgrep
 nsa-name
 openw
 own
@@ -12,4 +14,3 @@ start
 vimv
 wname
 yt-music
-hgrep
