@@ -27,7 +27,7 @@ MUSICDIR="$HOME"/Music
 
 case "$#" in
 0)
-	exec vlc -L -Z "$MUSICDIR" > /dev/null 2>&1 &
+	exec vlc -L -Z "$MUSICDIR" >/dev/null 2>&1 &
 	;;
 *)
 	cd "$MUSICDIR" || exit 1

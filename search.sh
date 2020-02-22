@@ -15,14 +15,9 @@ Searches for files containing PATTERN and hides stderr.
 
 	    --help    display this help and exit"
 
-if test "$#" -eq 0; then
-	printf '%s\n' "$usage"
-	exit 1
-fi
-
-if test "$1" = "--help"; then
+if [ "$#" -eq 0 ] || [ "$1" = "--help" ]; then
 	printf '%s\n' "$usage"
 	exit
 fi
 
-exec find . -iname "*$1*" 2> /dev/null
+exec find . -iname "*$1*" 2>/dev/null

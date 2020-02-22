@@ -25,9 +25,9 @@ if test "$1" = "--help"; then
 	exit
 fi
 
-if ! command -v "$1" > /dev/null 2>&1; then
+if ! command -v "$1" >/dev/null 2>&1; then
 	printf "start: no such command '%s'" "$1" >&2
 	exit 1
 fi
 
-nohup "$@" > /dev/null 2>&1 &
+nohup "$@" >/dev/null 2>&1 &

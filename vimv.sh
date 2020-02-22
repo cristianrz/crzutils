@@ -44,7 +44,7 @@ trap '{ rm -f "${FILENAMES_FILE}" ; }' EXIT
 IFS='\r\n' GLOBIGNORE='*' command eval 'src=($(ls))'
 
 for ((i = 0; i < ${#src[@]}; ++i)); do
-	echo "${src[i]}" >> "${FILENAMES_FILE}"
+	echo "${src[i]}" >>"${FILENAMES_FILE}"
 done
 
 vim "${FILENAMES_FILE}"
@@ -58,7 +58,7 @@ for ((i = 0; i < ${#src[@]}; ++i)); do
 
 		mkdir -p "$(dirname "${dest[i]}")"
 
-		if git ls-files --error-unmatch "${src[i]}" > /dev/null 2>&1; then
+		if git ls-files --error-unmatch "${src[i]}" >/dev/null 2>&1; then
 			git mv "${src[i]}" "${dest[i]}"
 		else
 			mv "${src[i]}" "${dest[i]}"
