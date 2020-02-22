@@ -37,7 +37,7 @@ case "$1" in
 	;;
 esac
 
-cat << 'EOF'
+cat <<'EOF'
 What do you want to do?
 1) poweroff
 2) reboot
