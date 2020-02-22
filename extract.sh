@@ -41,5 +41,5 @@ case "$1" in
 *.gz) exec gunzip "$@" ;;
 *.rar) exec unrar e "$@" ;;
 *.zip) exec unzip "$@" ;;
-*) die "'$@' cannot be extracted" ;;
+*) die "'$*' cannot be extracted" ;;
 esac
