@@ -16,10 +16,19 @@ Shows installed packages.
 	-h  display this help and exit
 	-d  print disk usage"
 
+awkcmd='function human(x,u){
+	if(x > 1073741824 ) { printf "%i%s",x/1000000000,"T" }
+	else if(x > 1048576) { printf "%i%s",x/1000000,"G" }
+	else if(x > 1024) { printf "%i%s",x/1000,"M" }
+	else { printf "%i%s",x,"K" }
+}
+
+{ print human($1),$2; }'
+
 while getopts "hd" c; do
 	case "$c" in
 	d)
-		dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -n
+		dpkg-query -Wf '${Installed-Size}\t${Package}\n' | awk "$awkcmd" | sort -h
 		exit 0
 		;;
 	*)
