@@ -34,7 +34,7 @@ go_through() {
 	{
 		printf '%s\n' "$1"
 		for i in $1; do
-			apt-cache depends "$i" | awk -f depends.awk
+			apt-cache depends "$i" | awk "$awkcode"
 		done
 	} | uniq
 }
