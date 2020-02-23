@@ -1,4 +1,4 @@
-OBJ = apt-du bye hgrep droidmnt extract git-cloc nsa-name openw own search start vimv wname yt-music apt-list
+OBJ = bye hgrep droidmnt extract git-cloc nsa-name openw own search start vimv wname yt-music apt-list apt-deps
 
 STOW = /usr/local/stow
 
@@ -10,7 +10,7 @@ nsa-name:
 	@go build -ldflags="-s -w" -o $@ $< 
 
 .sh:
-	@shfmt -mn $< >$@
+	@cat $< >$@
 	@chmod a+x $@
 
 install:
