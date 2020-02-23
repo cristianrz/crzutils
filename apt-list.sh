@@ -25,17 +25,43 @@ awkcmd='function human(x,u){
 
 { print human($1),$2; }'
 
+human=false
+disk=false
+pkg=
+
 while getopts "hd" c; do
 	case "$c" in
-	d)
-		dpkg-query -Wf '${Installed-Size}\t${Package}\n' | awk "$awkcmd" | sort -h
-		exit 0
-		;;
+	h) human=true ;;
+	d) disk=true ;;
 	*)
 		printf '%s\n' "$usage"
 		exit 1
 		;;
 	esac
 done
+shift "$((OPTIND - 1))"
 
-dpkg --get-selections | grep -v deinstall | cut -f1 | cut -d':' -f1 | sort
+case "$#" in
+0) ;;
+*) pkg="$1" && shift ;;
+esac
+
+case "$disk" in
+false)
+	pkgs="$(dpkg --get-selections | grep -v deinstall | cut -f1 | cut -d':' -f1 | sort)"
+	;;
+true)
+	pkgs="$(dpkg-query -Wf '${Installed-Size}\t${Package}\n')"
+
+	case "$pkg" in
+	"") pkgs="$(echo "$pkgs" | sort -n)" ;;
+	*) pkgs="$(echo "$pkgs" | grep "$pkg")" ;;
+	esac
+
+	case "$human" in
+	true) pkgs="$(echo "$pkgs" | awk "$awkcmd")" ;;
+	esac
+	;;
+esac
+
+printf '%s\n' "$pkgs"
