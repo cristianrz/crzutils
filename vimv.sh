@@ -1,72 +1,30 @@
-#!/bin/bash
-#
-# Lists the current directory's files in Vim, so you can edit it and save to
-# rename them
-#
-# Copyright 2017 Thameera Senanayaka
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy of
-# this software and associated documentation files (the "Software"), to deal in
-# the Software without restriction, including without limitation the rights to
-# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-# the Software, and to permit persons to whom the Software is furnished to do so,
-# subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-# FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-# COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-# IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+#!/bin/sh
 
-usage="crzutils v0.0.1 (C) 2020 Cristian Ariza
-vimv (C) 2017 Thameera Senanayaka
+set -eu
 
-Usage: $(basename "$0") [OPTION]
+TMP="$(mktemp)"
+trap 'rm "$TMP"' EXIT
 
-Lists the current directory's files in Vim, so you can edit it and save to
-rename them
+n_before="$(ls -1 | wc -l)"
 
-	    --help    display this help and exit"
+"${EDITOR-vi}" "$TMP"
 
-if test "$1" = "--help"; then
-	printf '%s\n' "$usage"
-	exit
+LS="$(ls -1)"
+n="$(echo "$LS" | tee "$TMP" | wc -l)"
+
+if [ "$n_before" != "$n" ]; then
+	echo Files changed during edit. Exiting.
+	exit 1
 fi
 
-FILENAMES_FILE="$(mktemp -d)"
+i=1
+while [ "$i" -lt "$n" ]; do
+	before="$(echo "$LS" | sed -n "$i"p)"
+	after="$(sed -n "$i"p "$TMP")"
 
-trap '{ rm -f "${FILENAMES_FILE}" ; }' EXIT
-
-IFS='\r\n' GLOBIGNORE='*' command eval 'src=($(ls))'
-
-for ((i = 0; i < ${#src[@]}; ++i)); do
-	echo "${src[i]}" >>"${FILENAMES_FILE}"
-done
-
-vim "${FILENAMES_FILE}"
-
-IFS=$'\r\n' GLOBIGNORE='*' command eval 'dest=($(cat "${FILENAMES_FILE}"))'
-
-count=0
-for ((i = 0; i < ${#src[@]}; ++i)); do
-
-	if [ "${src[i]}" != "${dest[i]}" ]; then
-
-		mkdir -p "$(dirname "${dest[i]}")"
-
-		if git ls-files --error-unmatch "${src[i]}" >/dev/null 2>&1; then
-			git mv "${src[i]}" "${dest[i]}"
-		else
-			mv "${src[i]}" "${dest[i]}"
-		fi
-
-		((count++))
+	if [ "$before" != "$after" ]; then
+		mv -v "$before" "$after"
 	fi
 
+	i="$((i+1))"
 done
-
-printf '%s files renamed\n' "$count"
