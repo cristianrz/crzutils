@@ -9,12 +9,11 @@
 usage="crzutils v0.0.1
 Copyright (C) 2020 Cristian Ariza
 
-Usage: $(basename "$0") [OPTION]
-
+Usage: $(basename "$0") [-dh]
 Shows installed packages.
 
-	-h  display this help and exit
-	-d  print disk usage"
+	-d  print disk usage
+	-h  print sizes in human readable form"
 
 awkcmd='function human(x,u){
 	if(x > 1073741824 ) { printf "%i%s",x/1000000000,"T" }
@@ -25,10 +24,9 @@ awkcmd='function human(x,u){
 
 { print human($1),$2; }'
 
-human=false
 disk=false
+human=false
 pkg=
-
 while getopts "hd" c; do
 	case "$c" in
 	h) human=true ;;
@@ -41,27 +39,29 @@ while getopts "hd" c; do
 done
 shift "$((OPTIND - 1))"
 
-case "$#" in
-0) ;;
-*) pkg="$1" && shift ;;
-esac
+if [ "$#" -gt 0 ]; then
+	pkg="$1" && shift
+fi
 
 case "$disk" in
 false)
-	pkgs="$(dpkg --get-selections | grep -v deinstall | cut -f1 | cut -d':' -f1 | sort)"
+	dpkg --get-selections | awk '
+		/deinstall/ {}
+		{ gsub(/:*/,"",$1); print $1; }'	
 	;;
 true)
-	pkgs="$(dpkg-query -Wf '${Installed-Size}\t${Package}\n')"
+	cmd="dpkg-query -Wf '\${Installed-Size}\t\${Package}\n'"
 
 	case "$pkg" in
-	"") pkgs="$(echo "$pkgs" | sort -n)" ;;
-	*) pkgs="$(echo "$pkgs" | grep "$pkg")" ;;
+	"") cmd="$cmd | sort -n" ;;
+	*) cmd="$cmd | grep $pkg" ;;
 	esac
 
-	case "$human" in
-	true) pkgs="$(echo "$pkgs" | awk "$awkcmd")" ;;
-	esac
+	if "$human"; then
+		cmd="$cmd | awk '$awkcmd'" ;;
+	fi
+
+	eval "$cmd"
 	;;
 esac
 
-printf '%s\n' "$pkgs"
