@@ -1,10 +1,9 @@
 #!/bin/sh
 #
-# Prompts the user for a logout option
-#
 # Copyright (C) 2020 Cristian Ariza
-#
 # See LICENSE file for details
+#
+# Prompts the user for a logout option
 
 ask() {
 	printf '> ' && read -r response
@@ -46,4 +45,5 @@ What do you want to do?
 0) nothing
 
 EOF
+
 ask
