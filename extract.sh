@@ -36,6 +36,7 @@ case "$1" in
 *.tar | *.tar.xz) exec tar fvx "$@" ;;
 *.tgz | *.tar.gz) exec tar fvxz "$@" ;;
 *.7z) exec 7za x "$@" ;;
+*.iso) exec 7z x "$@" ;;
 *.Z) exec uncompress "$@" ;;
 *.bz2) exec bunzip2 "$@" ;;
 *.gz) exec gunzip "$@" ;;
