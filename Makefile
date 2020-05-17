@@ -1,23 +1,18 @@
-OBJ = bye hgrep droidmnt extract git-cloc nsa-name openw own search start vimv wname yt-music apt-list apt-deps
+OBJ = apt-deps apt-list csv2html extract git-cloc nix-add nix-autoremove nix-delete nix-info nix-search nsa-name openw pdfget search start vimv wname yt-music
 
-STOW = /usr/local/stow
+DESTDIR = ${HOME}/.local/stow/cristianrz
 
-all: crzutils
-
-crzutils: $(OBJ)
+all: $(OBJ)
 
 nsa-name:
-	@go build -ldflags="-s -w" -o $@ $< 
-
-.sh:
-	@cat $< >$@
-	@chmod a+x $@
+	go build -ldflags="-s -w" -o $@ $< 
 
 install:
-	@rm -rf $(STOW)/crzutils
-	@mkdir -p $(STOW)/crzutils/bin
-	@cp -t $(STOW)/crzutils/bin $(OBJ)
-	@stow -d $(STOW) crzutils
+	mkdir -p $(DESTDIR)$(PREFIX)/bin
+	cp -t $(DESTDIR)$(PREFIX)/bin $(OBJ)
+
+uninstall:
+	for i in $(OBJ); do rm -f $(DESTDIR)$(PREFIX)/bin/$$i; done
 
 clean:
-	@rm -f ./$(OBJ)
+	rm -f nsa-name

@@ -1,0 +1,35 @@
+#!/usr/bin/awk -f
+#
+# Turns CSV's into HTML tables
+
+BEGIN {
+	FS = ","
+	OFS = ""
+	print "<style>"
+	print "table {"
+	print "\t  border-collapse: collapse;"
+	print "}"
+	print "th, td {"
+	print "\tborder:1px solid black;"
+	print "}"
+	print "</style>"
+	print "<table>"
+}
+
+{
+	printf "\t<tr>\n\t\t"
+	for (i = 1; i <= NF; i++) {
+		if (NR == 1) {
+			printf "<th>%s</th>", $i
+		} else {
+			printf "<td>%s</td>", $i
+		}
+	}
+	print "\n\t</tr>"
+	next
+}
+
+END {
+	print "</table>"
+}
+

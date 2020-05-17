@@ -1,0 +1,2 @@
+#!/bin/sh
+nix-env -qa | grep --color=auto -E "$1"

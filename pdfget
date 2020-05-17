@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Downloads a website in PDF
+
+TMP="$(mktemp)"
+trap 'rm -rf "$TMP"' EXIT
+echo "[+] Fetching..."
+wkhtmltopdf "$1" "$TMP" >/dev/null 2>&1
+echo "[+] Opening..."
+calibre "$TMP" >/dev/null 2>&1
+echo "[+] Cleaning up..."

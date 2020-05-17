@@ -1,0 +1,4 @@
+#!/bin/sh
+nix-env -e "$@"
+exec nix-collect-garbage -d
+

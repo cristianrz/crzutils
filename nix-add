@@ -1,0 +1,10 @@
+#!/bin/sh
+case x"$1" in
+x-u)
+	nix-channel --update nixpkgs
+	exec nix-env -u '*'
+	;;
+*)
+	exec nix-env -i "$@"
+	;;
+esac
