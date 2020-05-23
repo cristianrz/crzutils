@@ -1,0 +1,25 @@
+#!/usr/bin/awk -f
+#
+# Shows apt packages sorted by size
+
+BEGIN {
+	OFS = "\t"
+	dpkg = "dpkg-query -Wf '${Installed-Size}\\t${Package}\\n'"
+	sort = "sort -h"
+	while (dpkg | getline $0) {
+		print(human($1), $2) | sort
+	}
+	close(dpkg)
+	close(sort)
+}
+
+
+function human(abs)
+{
+	if (abs < 1000) {
+		res = sprintf("%.0f", abs) "K"
+	} else {
+		res = sprintf("%.0f", abs / 1000) "M"
+	}
+	return res
+}
